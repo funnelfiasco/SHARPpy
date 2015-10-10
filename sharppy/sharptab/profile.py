@@ -10,9 +10,16 @@ class Profile(object):
         if 'url' in kwargs:
             url = kwargs.get('url')
             print url
-            import urllib
+            import urllib2
 
-            snfile = urllib.urlopen(url).read().decode('utf-8').split("\n")
+            try:
+                snfile = urllib2.urlopen(url).read().decode('utf-8').split("\n")
+            except urllib2.HTTPError as err:
+                if err.code == 404:
+                    exit('ERROR: %s not found' % url)
+                else:
+                    exit('ERROR: HTTP code %i' % err.code)
+
             for i in range(0, len(snfile)):
                 if (snfile[i] == "%RAW%"): bgn = i+1
                 if (snfile[i] == "%END%"): end = i-1
