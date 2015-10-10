@@ -7,3 +7,7 @@ To run, please type
     python run_sharppy.py XXX
 
 where XXX is the 3 letter identifier of the US Sounding site you wish to view. This script will plot the current sounding using data from the Storm Prediction Center's website.
+
+Requirements
+============
+SHARPpy requires the Python numpy and TKinter packages.
